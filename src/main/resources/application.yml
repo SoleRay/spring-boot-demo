@@ -20,6 +20,9 @@ spring:
     testOnReturn: false
     poolPreparedStatements: true
     maxOpenPreparedStatements: 20
+  http:
+    multipart:
+      max-file-size: 3MB
 server:
   context-path: /demo
   port: 8080
@@ -27,6 +30,8 @@ mybatis:
   mapper-locations: classpath*:com/demo/mapper/**/*.xml
   config-location: classpath:mybatis/mybatis-config.xml
   type-aliases-package: classpath:com.demo.entity.*
+logging:
+  config: classpath:log4j2.xml
 
 #uat环境
 ---
@@ -51,6 +56,9 @@ spring:
     testOnReturn: false
     poolPreparedStatements: true
     maxOpenPreparedStatements: 20
+  http:
+    multipart:
+      max-file-size: 3MB
 server:
   context-path: /demo
   port: 8080
@@ -58,6 +66,8 @@ mybatis:
   mapper-locations: classpath*:com/demo/mapper/**/*.xml
   config-location: classpath:mybatis/mybatis-config.xml
   type-aliases-package: classpath:com.demo.entity.*
+logging:
+  config: classpath:log4j2.xml
 
 #prod环境
 ---
@@ -82,6 +92,9 @@ spring:
     testOnReturn: false
     poolPreparedStatements: true
     maxOpenPreparedStatements: 20
+  http:
+    multipart:
+      max-file-size: 3MB
 server:
   context-path: /demo
   port: 8080
@@ -89,3 +102,5 @@ mybatis:
   mapper-locations: classpath*:com/demo/mapper/**/*.xml
   config-location: classpath:mybatis/mybatis-config.xml
   type-aliases-package: classpath:com.demo.entity.*
+logging:
+  config: classpath:log4j2.xml
