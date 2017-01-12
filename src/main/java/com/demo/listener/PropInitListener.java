@@ -16,8 +16,6 @@ public class PropInitListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         PropUtil.loadProperties("properties/admin.properties");
-        PropUtil.loadProperties("properties/qn.properties");
-        PropUtil.loadProperties("properties/site.properties");
     }
 
     @Override

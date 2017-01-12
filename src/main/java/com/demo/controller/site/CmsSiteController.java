@@ -5,7 +5,8 @@ import com.demo.bean.result.Result;
 import com.demo.entity.site.CmsSite;
 import com.demo.exception.BusinessException;
 import com.demo.service.site.CmsSiteService;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,7 +22,7 @@ import java.util.List;
 @RequestMapping("/site")
 public class CmsSiteController {
 
-    private static Logger logger = Logger.getLogger(CmsSiteController.class);
+    private static Logger logger = LogManager.getLogger(CmsSiteController.class);
 
     @Resource
     private CmsSiteService cmsSiteService;

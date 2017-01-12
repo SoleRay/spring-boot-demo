@@ -105,8 +105,8 @@
     <!--mybatis 通用包 -->
     <dependency>
       <groupId>tk.mybatis</groupId>
-      <artifactId>mapper</artifactId>
-      <version>3.3.9</version>
+      <artifactId>mapper-spring-boot-starter</artifactId>
+      <version>1.0.0</version>
     </dependency>
 
     <dependency>
@@ -165,25 +165,25 @@
   </build>
 
 
-  <repositories>
-    <repository>
-      <id>spring-snapshots</id>
-      <url>http://repo.spring.io/snapshot</url>
-      <snapshots><enabled>true</enabled></snapshots>
-    </repository>
-    <repository>
-      <id>spring-milestones</id>
-      <url>http://repo.spring.io/milestone</url>
-    </repository>
-  </repositories>
-  <pluginRepositories>
-    <pluginRepository>
-      <id>spring-snapshots</id>
-      <url>http://repo.spring.io/snapshot</url>
-    </pluginRepository>
-    <pluginRepository>
-      <id>spring-milestones</id>
-      <url>http://repo.spring.io/milestone</url>
-    </pluginRepository>
-  </pluginRepositories>
+  <!--<repositories>-->
+    <!--<repository>-->
+      <!--<id>spring-snapshots</id>-->
+      <!--<url>http://repo.spring.io/snapshot</url>-->
+      <!--<snapshots><enabled>true</enabled></snapshots>-->
+    <!--</repository>-->
+    <!--<repository>-->
+      <!--<id>spring-milestones</id>-->
+      <!--<url>http://repo.spring.io/milestone</url>-->
+    <!--</repository>-->
+  <!--</repositories>-->
+  <!--<pluginRepositories>-->
+    <!--<pluginRepository>-->
+      <!--<id>spring-snapshots</id>-->
+      <!--<url>http://repo.spring.io/snapshot</url>-->
+    <!--</pluginRepository>-->
+    <!--<pluginRepository>-->
+      <!--<id>spring-milestones</id>-->
+      <!--<url>http://repo.spring.io/milestone</url>-->
+    <!--</pluginRepository>-->
+  <!--</pluginRepositories>-->
 </project>

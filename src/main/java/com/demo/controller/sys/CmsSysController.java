@@ -5,7 +5,8 @@ import com.demo.bean.result.Result;
 import com.demo.exception.BusinessException;
 import com.demo.service.sys.CmsSysService;
 import com.demo.util.Constants;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,7 +24,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/sys")
 public class CmsSysController {
 
-    private static Logger logger = Logger.getLogger(CmsSysController.class);
+    private static Logger logger = LogManager.getLogger(CmsSysController.class);
 
     @Resource
     private CmsSysService cmsSysServie;
