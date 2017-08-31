@@ -2,14 +2,14 @@ package com.demo.dto.result.demo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class DemoResultDTO {
 
     private long id;
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
-    private LocalDateTime publishTime;
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
+    private LocalDate createDate;
 
     public long getId() {
         return id;
@@ -19,11 +19,11 @@ public class DemoResultDTO {
         this.id = id;
     }
 
-    public LocalDateTime getPublishTime() {
-        return publishTime;
+    public LocalDate getCreateDate() {
+        return createDate;
     }
 
-    public void setPublishTime(LocalDateTime publishTime) {
-        this.publishTime = publishTime;
+    public void setCreateDate(LocalDate createDate) {
+        this.createDate = createDate;
     }
 }

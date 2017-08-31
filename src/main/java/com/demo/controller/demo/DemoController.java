@@ -5,6 +5,7 @@ import com.demo.anno.ValidateSign;
 import com.demo.bean.result.Result;
 import com.demo.dto.param.demo.DemoParamDTO;
 import com.demo.dto.result.demo.DemoResultDTO;
+import com.demo.entity.demo.Demo;
 import com.demo.service.demo.DemoService;
 import com.demo.util.resp.ResponseUtil;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,12 @@ public class DemoController {
     @ResponseBody
     public Result upload(DemoParamDTO param) throws Exception{
 
-        return ResponseUtil.setSuccessDataResponse(new DemoResultDTO());
+        Demo demo = demoService.selectByPrimaryKey(param.getId());
+
+        DemoResultDTO dto = new DemoResultDTO();
+        dto.setId(demo.getId());
+        dto.setCreateDate(demo.getCreateDate());
+
+        return ResponseUtil.setSuccessDataResponse(dto);
     }
 }
