@@ -6,14 +6,14 @@ import org.apache.logging.log4j.Logger;
 
 /**
  */
-public class BusinessException extends RuntimeException{
+public class DemoException extends RuntimeException{
 
 	private static final long serialVersionUID = 5660370852963326274L;
 
-	private static Logger logger = LogManager.getLogger(BusinessException.class);
+	private static Logger logger = LogManager.getLogger(DemoException.class);
 	
 	
-	public BusinessException(String message) {
+	public DemoException(String message) {
 		super(message);
 		logger.error(message);
 	}

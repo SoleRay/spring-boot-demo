@@ -31,6 +31,19 @@ public class Pageable {
         return totalCount/pageSize+1;
     }
 
+    private int genPageSize(long totalPages, long totalCount) {
+        if(totalPages==1){
+            return (int) totalCount;
+        }
+
+        if(pageNum<totalPages){
+            return pageSize;
+        }
+
+        return (int) (totalCount - (pageNum-1)*pageSize);
+
+    }
+
     public long getPageNum() {
         return pageNum;
     }
@@ -48,6 +61,13 @@ public class Pageable {
     }
 
     public PageInfo genPageInfo(long totalCount){
-        return new PageInfo(pageNum,pageSize,totalCount,getTotalPages(totalCount));
+        long totalPages = getTotalPages(totalCount);
+        int currentSize = genPageSize(totalPages,totalCount);
+
+        return new PageInfo(pageNum,currentSize,totalCount,totalPages);
     }
+
+
+
+
 }
