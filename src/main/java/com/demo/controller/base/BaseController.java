@@ -3,11 +3,14 @@ package com.demo.controller.base;
 import com.demo.bean.result.Result;
 import com.demo.enums.resp.ResponseStatus;
 import com.demo.exception.DemoException;
+import com.demo.exception.SignException;
 import com.demo.util.resp.ResponseUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+
 
 public class BaseController {
 
@@ -23,6 +26,13 @@ public class BaseController {
     @ExceptionHandler(value = { DemoException.class })
     @ResponseBody
     public Result handleSmsExceptionEx(DemoException ex) {
+        logger.error(ex);
+        return ResponseUtil.setErrResponse(ex.getMessage());
+    }
+
+    @ExceptionHandler(value = { SignException.class })
+    @ResponseBody
+    public Result handleSignExceptionEx(SignException ex) {
         logger.error(ex);
         return ResponseUtil.setErrResponse(ex.getMessage());
     }

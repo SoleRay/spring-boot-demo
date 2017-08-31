@@ -96,6 +96,11 @@
       <version>1.0.31</version>
     </dependency>
 
+    <!-- spring boot 整合 log4j2  -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-log4j2</artifactId>
+    </dependency>
 
     <!--spring data redis -->
     <dependency>
