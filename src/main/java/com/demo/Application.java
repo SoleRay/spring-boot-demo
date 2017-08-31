@@ -1,10 +1,8 @@
 package com.demo;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
-import tk.mybatis.mapper.common.Mapper;
 
 
 /**
@@ -19,12 +17,8 @@ import tk.mybatis.mapper.common.Mapper;
  */
 
 
-//@Configuration
-//@ComponentScan(value = {"com.demo.controller","com.demo.service"})
-//@MapperScan("com.demo.dao")
-@ServletComponentScan("com.demo.listener")
+@ServletComponentScan(value = {"com.demo.listener","com.demo.filter"})
 @SpringBootApplication
-@MapperScan(basePackages = "com.demo.dao", markerInterface = Mapper.class)
 public class Application {
 
     public static void main(String[] args) {
