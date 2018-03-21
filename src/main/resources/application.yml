@@ -25,9 +25,9 @@ spring:
       max-file-size: 3MB
   redis:
     database: 0
-    host: 101.37.37.113
-    port: 6379
-    password: happyhome123ll3KK45,AA?
+    host: 0
+    port: 0
+    password: 0
     timeout: 0
     pool:
       max-active: 8
@@ -72,9 +72,9 @@ spring:
       max-file-size: 3MB
   redis:
     database: 0
-    host: 101.37.37.113
-    port: 6379
-    password: happyhome123ll3KK45,AA?
+    host: 0
+    port: 0
+    password: 0
     timeout: 0
     pool:
       max-active: 8
@@ -119,9 +119,9 @@ spring:
       max-file-size: 3MB
   redis:
     database: 0
-    host: 101.37.37.113
-    port: 6379
-    password: happyhome123ll3KK45,AA?
+    host: 0
+    port: 0
+    password: 0
     timeout: 0
     pool:
       max-active: 8
