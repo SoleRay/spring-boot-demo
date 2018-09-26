@@ -1,14 +1,14 @@
-package com.demo.dto.result.demo;
+package com.demo.dto.request.demo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
-public class DemoResultDTO {
+public class DemoReqDTO {
 
     private long id;
 
-    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate createDate;
 
     public long getId() {

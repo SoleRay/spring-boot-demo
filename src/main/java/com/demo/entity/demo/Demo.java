@@ -1,9 +1,14 @@
 package com.demo.entity.demo;
 
+import org.apache.ibatis.type.LocalDateTimeTypeHandler;
+import org.apache.ibatis.type.LocalDateTypeHandler;
+import tk.mybatis.mapper.annotation.ColumnType;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Table(name = "tb_demo")
 public class Demo {
@@ -18,7 +23,13 @@ public class Demo {
     private String demoName;
 
     @Column(name = "create_date")
+    @ColumnType(typeHandler = LocalDateTypeHandler.class)
     private LocalDate createDate;
+
+
+    @Column(name = "update_time")
+    @ColumnType(typeHandler = LocalDateTimeTypeHandler.class)
+    private LocalDateTime updateTime;
 
     public Long getId() {
         return id;

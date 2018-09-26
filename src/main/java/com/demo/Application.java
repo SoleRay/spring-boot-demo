@@ -17,7 +17,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
  */
 
 
-@ServletComponentScan(value = {"com.demo.listener","com.demo.filter"})
+@tk.mybatis.spring.annotation.MapperScan(basePackages = "com.demo.dao")
 @SpringBootApplication
 public class Application {
 

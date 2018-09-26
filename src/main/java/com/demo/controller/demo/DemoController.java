@@ -3,8 +3,8 @@ package com.demo.controller.demo;
 
 import com.demo.anno.ValidateSign;
 import com.demo.bean.result.Result;
-import com.demo.dto.param.demo.DemoParamDTO;
-import com.demo.dto.result.demo.DemoResultDTO;
+import com.demo.dto.request.demo.DemoReqDTO;
+import com.demo.dto.response.demo.DemoRespDTO;
 import com.demo.entity.demo.Demo;
 import com.demo.properties.demo.PropDemo;
 import com.demo.service.demo.DemoService;
@@ -33,11 +33,11 @@ public class DemoController {
     @ValidateSign
     @RequestMapping(value="/get",method= RequestMethod.POST)
     @ResponseBody
-    public Result upload(DemoParamDTO param) throws Exception{
+    public Result upload(DemoReqDTO param) throws Exception{
 
         Demo demo = demoService.selectByPrimaryKey(param.getId());
 
-        DemoResultDTO dto = new DemoResultDTO();
+        DemoRespDTO dto = new DemoRespDTO();
         dto.setId(demo.getId());
         dto.setCreateDate(demo.getCreateDate());
 
