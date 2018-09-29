@@ -22,6 +22,9 @@ public class Demo {
     @Column(name = "demo_name")
     private String demoName;
 
+    /**
+     * 通用mybatis目前以这种方式支持LocalDate和LocalDateTime
+     */
     @Column(name = "create_date")
     @ColumnType(typeHandler = LocalDateTypeHandler.class)
     private LocalDate createDate;
@@ -61,5 +64,13 @@ public class Demo {
 
     public void setCreateDate(LocalDate createDate) {
         this.createDate = createDate;
+    }
+
+    public LocalDateTime getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(LocalDateTime updateTime) {
+        this.updateTime = updateTime;
     }
 }

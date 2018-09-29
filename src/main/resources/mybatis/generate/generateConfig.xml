@@ -4,9 +4,13 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-    <classPathEntry location="mysql-connector-java-5.1.40.jar" />
-
     <context id="MySQLTables" targetRuntime="MyBatis3">
+
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
+            <!-- caseSensitive默认false，当数据库表名区分大小写时，可以将该属性设置为true -->
+            <property name="caseSensitive" value="true"/>
+        </plugin>
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
                         connectionURL="jdbc:mysql://192.168.0.1:3306/demo"
                         userId="root"
@@ -17,22 +21,22 @@
             <property name="forceBigDecimals" value="false" />
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="com.demo.entity" targetProject="../../../java">
+        <javaModelGenerator targetPackage="com.demo.entity" targetProject="${targetJavaProject}">
             <property name="enableSubPackages" value="true" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="com.demo.mapper" targetProject="../../../java">
+        <sqlMapGenerator targetPackage="com.demo.mapper" targetProject="${targetJavaProject}">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
 
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.demo.dao" targetProject="../../../java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.demo.dao" targetProject="${targetJavaProject}">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
-        <table tableName="cms_news"
-               domainObjectName="news.CmsNews"
-               mapperName="news.CmsNewsDao"
+        <table tableName="demo"
+               domainObjectName="demo.Demo"
+               mapperName="demo.DemoDao"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"
@@ -40,33 +44,6 @@
                selectByExampleQueryId="false">
         </table>
 
-        <table tableName="cms_site" domainObjectName="site.CmsSite"
-               mapperName="site.CmsSiteDao"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
-
-        <table tableName="cms_news_pic" domainObjectName="pic.CmsNewsPic"
-               mapperName="pic.CmsNewsPicDao"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
-
-        <table tableName="cms_news_owner"
-               domainObjectName="news.CmsNews"
-               mapperName="news.CmsNewsDao"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
 
     </context>
 </generatorConfiguration>

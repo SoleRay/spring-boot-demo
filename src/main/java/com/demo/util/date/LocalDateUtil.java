@@ -18,6 +18,10 @@ public class LocalDateUtil {
         return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
 
+    public static LocalDateTime convertToLocalDateTime(long timestamp){
+        return LocalDateTime.ofEpochSecond(timestamp,0,ZoneOffset.ofHours(8));
+    }
+
     public static LocalTime convertToLocalTime(Date date){
         return date.toInstant().atZone(ZoneId.systemDefault()).toLocalTime();
     }
@@ -36,6 +40,14 @@ public class LocalDateUtil {
 
     public static Date convertToDate(LocalDateTime localDateTime){
         return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    public static long convertToLong(LocalDate localDate){
+        return localDate.toEpochDay();
+    }
+
+    public static long convertToLong(LocalDateTime localDateTime){
+        return localDateTime.toEpochSecond(ZoneOffset.ofHours(8));
     }
 
     public static String format(LocalDate localDate,String format){

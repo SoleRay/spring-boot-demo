@@ -1,8 +1,8 @@
 package com.demo.controller.base;
 
 import com.demo.bean.result.Result;
-import com.demo.enums.resp.ResponseStatus;
-import com.demo.exception.DemoException;
+import com.demo.enums.resp.RespStatusEnum;
+import com.demo.exception.BusinessException;
 import com.demo.exception.SignException;
 import com.demo.util.resp.ResponseUtil;
 import org.apache.logging.log4j.LogManager;
@@ -14,26 +14,29 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 public class BaseController {
 
-    private static final Logger logger = LogManager.getLogger(BaseController.class);
+    private static final Logger LOG = LogManager.getLogger(BaseController.class);
 
+    /**
+     * 所有不是继承BusinessException的异常，都视为系统异常
+     */
     @ExceptionHandler(value = { Exception.class })
     @ResponseBody
     public Result handleException(Exception ex) {
-        logger.error(ex);
-        return ResponseUtil.setErrResponse(ResponseStatus.SYS_ERROR);
+        LOG.error(ex);
+        return ResponseUtil.setSysErrorResponse();
     }
 
-    @ExceptionHandler(value = { DemoException.class })
+    /**
+     * 所有业务异常都继承BusinessException
+     */
+    @ExceptionHandler(value = { BusinessException.class })
     @ResponseBody
-    public Result handleSmsExceptionEx(DemoException ex) {
-        logger.error(ex);
-        return ResponseUtil.setErrResponse(ex.getMessage());
-    }
-
-    @ExceptionHandler(value = { SignException.class })
-    @ResponseBody
-    public Result handleSignExceptionEx(SignException ex) {
-        logger.error(ex);
-        return ResponseUtil.setErrResponse(ex.getMessage());
+    public Result handleBusinessException(BusinessException be) {
+        LOG.error(be.getMessage(),be);
+        if(be.getCode()==0){
+            return ResponseUtil.setBusErrorResponse(be.getMessage());
+        }else {
+            return ResponseUtil.setBusErrorResponse(be.getCode(),be.getMessage());
+        }
     }
 }

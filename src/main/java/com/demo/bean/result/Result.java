@@ -14,29 +14,23 @@ package com.demo.bean.result;
  * @date 2017年07月14日
  * @version 1.0
  */
-public class Result {
+public class Result<T> {
 
 	private int code; //编码
 
 	private String msg;  //结果说明
 
-	private Object data;//数据
+	private T data;//数据
 
-	private Object info; //其它信息
 
 	public Result(int code, String msg) {
 		this(code,msg,null);
 	}
 
-	public Result(int code, String msg, Object data) {
-		this(code,msg,data,null);
-	}
-
-	public Result(int code, String msg, Object data, Object info) {
+	public Result(int code, String msg, T data) {
 		this.code = code;
 		this.msg = msg;
 		this.data = data;
-		this.info = info;
 	}
 
 	public int getCode() {
@@ -59,15 +53,8 @@ public class Result {
 		return data;
 	}
 
-	public void setData(Object data) {
+	public void setData(T data) {
 		this.data = data;
 	}
 
-	public Object getInfo() {
-		return info;
-	}
-
-	public void setInfo(Object info) {
-		this.info = info;
-	}
 }

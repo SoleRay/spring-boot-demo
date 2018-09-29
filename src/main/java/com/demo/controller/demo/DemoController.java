@@ -11,29 +11,28 @@ import com.demo.service.demo.DemoService;
 import com.demo.util.resp.ResponseUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
-@Controller
+@RestController
 @RequestMapping("/demo")
 public class DemoController {
 
-    private static final Logger logger = LogManager.getLogger(DemoController.class);
+    private static final Logger LOG = LogManager.getLogger(DemoController.class);
 
-    @Resource
+    @Autowired
     private DemoService demoService;
 
-    @Resource
+    @Autowired
     private PropDemo propDemo;
 
     @ValidateSign
-    @RequestMapping(value="/get",method= RequestMethod.POST)
-    @ResponseBody
-    public Result upload(DemoReqDTO param) throws Exception{
+    @PostMapping(value="/get",produces= MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Result get(@RequestBody DemoReqDTO param,@RequestHeader(value = "token", required = false) String token){
 
         Demo demo = demoService.selectByPrimaryKey(param.getId());
 
@@ -42,7 +41,7 @@ public class DemoController {
         dto.setCreateDate(demo.getCreateDate());
 
 
-        logger.info(propDemo.getName());
+        LOG.info(propDemo.getName());
         return ResponseUtil.setSuccessDataResponse(dto);
     }
 }

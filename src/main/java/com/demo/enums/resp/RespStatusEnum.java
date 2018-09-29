@@ -6,30 +6,29 @@ package com.demo.enums.resp;
  * @author Administrator
  *
  */
-public enum ResponseStatus {
+public enum RespStatusEnum {
 
-  
 
-    OK(0, "ok"),
+    /**
+     * 一切OK时
+     */
+    SUCCESS(0, "ok"),
 
+    /**
+     * 系统错误，一般不是主动抛出的异常
+     */
     SYS_ERROR(1,"系统错误"),
 
-    NORMAL_ERROR(1,"普通异常"),
-
-    INVALID_ARGS(1,"请求参数不合法"),
-    
-    UN_SUBSCRIBE(1,"未关注公众号"),
-	
-
-	DUP_SEND(1,"重复发送"),
-	
-	CODE_ERR(1,"验证码不匹配");
+    /**
+     * 业务错误，一般有具体的错误信息
+     */
+    BUS_ERROR(2,"普通异常");
 	
 
     private final int code;
     private final String msg;
 
-    private ResponseStatus(int code, String msg) {
+    private RespStatusEnum(int code, String msg) {
         this.code = code;
         this.msg = msg;
     }
