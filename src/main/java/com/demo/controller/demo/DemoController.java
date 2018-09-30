@@ -3,26 +3,18 @@ package com.demo.controller.demo;
 
 import com.demo.anno.ValidateSign;
 import com.demo.bean.result.Result;
-import com.demo.dto.request.demo.DemoReqDTO;
-import com.demo.dto.response.demo.DemoRespDTO;
-import com.demo.entity.demo.Demo;
+import com.demo.dto.request.demo.DemoListReqDTO;
+import com.demo.dto.response.page.PageListRespDTO;
 import com.demo.properties.demo.PropDemo;
 import com.demo.service.demo.DemoService;
 import com.demo.util.resp.ResponseUtil;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.Resource;
 
 @RestController
 @RequestMapping("/demo")
 public class DemoController {
-
-    private static final Logger LOG = LogManager.getLogger(DemoController.class);
 
     @Autowired
     private DemoService demoService;
@@ -31,17 +23,17 @@ public class DemoController {
     private PropDemo propDemo;
 
     @ValidateSign
-    @PostMapping(value="/get",produces= MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Result get(@RequestBody DemoReqDTO param,@RequestHeader(value = "token", required = false) String token){
+    @PostMapping(value="/getAllDemos",produces= MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Result getAllDemos(@RequestBody DemoListReqDTO param, @RequestHeader(value = "userId", required = false) long userId){
+        PageListRespDTO pageList = demoService.getAllDemos(userId,param.getPageNum(), param.getPageSize());
+        return ResponseUtil.setSuccessDataResponse(pageList);
+    }
 
-        Demo demo = demoService.selectByPrimaryKey(param.getId());
+    @ValidateSign
+    @PostMapping(value="/getDemoList",produces= MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Result getDemoList(@RequestBody DemoListReqDTO param, @RequestHeader(value = "token", required = false) long userId){
 
-        DemoRespDTO dto = new DemoRespDTO();
-        dto.setId(demo.getId());
-        dto.setCreateDate(demo.getCreateDate());
-
-
-        LOG.info(propDemo.getName());
-        return ResponseUtil.setSuccessDataResponse(dto);
+        PageListRespDTO pageList = demoService.getDemoList(userId,param.getPageNum(), param.getPageSize());
+        return ResponseUtil.setSuccessDataResponse(pageList);
     }
 }

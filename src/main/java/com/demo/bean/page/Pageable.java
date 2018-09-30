@@ -1,15 +1,17 @@
 package com.demo.bean.page;
 
+import com.demo.dto.response.page.PageInfoRespDTO;
+
 /**
  * Created by Arthur on 2016/12/30 0030.
  */
 public class Pageable {
 
-    private long pageNum;
+    private int pageNum=1;
 
-    private int pageSize;
+    private int pageSize=10;
 
-    public Pageable(long pageNum, int pageSize) {
+    public Pageable(int pageNum, int pageSize) {
         this.pageNum = pageNum;
         this.pageSize = pageSize;
     }
@@ -18,17 +20,17 @@ public class Pageable {
         return (pageNum-1)*pageSize;
     }
 
-    public long getTotalPages(long totalCount){
+    public int getTotalPages(long totalCount){
 
         if(totalCount==0){
             return 1;
         }
 
         if(totalCount%pageSize==0){
-            return totalCount/pageSize;
+            return (int) (totalCount/pageSize);
         }
 
-        return totalCount/pageSize+1;
+        return (int) (totalCount/pageSize+1);
     }
 
     private int genPageSize(long totalPages, long totalCount) {
@@ -44,11 +46,11 @@ public class Pageable {
 
     }
 
-    public long getPageNum() {
+    public int getPageNum() {
         return pageNum;
     }
 
-    public void setPageNum(long pageNum) {
+    public void setPageNum(int pageNum) {
         this.pageNum = pageNum;
     }
 
@@ -60,11 +62,11 @@ public class Pageable {
         this.pageSize = pageSize;
     }
 
-    public PageInfo genPageInfo(long totalCount){
-        long totalPages = getTotalPages(totalCount);
+    public PageInfoRespDTO genPageInfo(long totalCount){
+        int totalPages = getTotalPages(totalCount);
         int currentSize = genPageSize(totalPages,totalCount);
 
-        return new PageInfo(pageNum,currentSize,totalCount,totalPages);
+        return new PageInfoRespDTO(pageNum,currentSize,totalCount,totalPages);
     }
 
 

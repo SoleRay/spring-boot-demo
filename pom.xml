@@ -73,6 +73,13 @@
       <version>1.0.2</version>
     </dependency>
 
+    <!--tk mybatis 分页-->
+    <dependency>
+      <groupId>com.github.pagehelper</groupId>
+      <artifactId>pagehelper-spring-boot-starter</artifactId>
+      <version>1.2.7</version>
+    </dependency>
+
     <!--mybatis end **************-->
 
     <!--mysql 数据库驱动 -->

@@ -12,5 +12,56 @@
     id, demo_key, demo_name,create_date
   </sql>
 
+  <resultMap id="DemoListMap" type="com.demo.dto.response.demo.DemoListRespDTO">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="demo_name" jdbcType="VARCHAR" property="demoName" />
+    <result column="demo_key" jdbcType="VARCHAR" property="demoKey" />
+    <result column="create_date" jdbcType="VARCHAR" property="createDate" />
+
+    <association property="demoAddr" javaType="com.demo.dto.response.demo.DemoListRespDTO$DemoAddr">
+      <result column="addr_id" jdbcType="VARCHAR" property="addrId" />
+      <result column="full_address" jdbcType="VARCHAR" property="fullAddress" />
+    </association>
+    <collection property="demoItemList" ofType="com.demo.dto.response.demo.DemoListRespDTO$DemoItem">
+      <result column="item_id" jdbcType="VARCHAR" property="itemId" />
+      <result column="item_name" jdbcType="VARCHAR" property="itemName" />
+    </collection>
+  </resultMap>
+
+    <select id="getDemoList" resultMap="DemoListMap">
+      select
+        m.id,
+        m.demo_name,
+        m.demo_key,
+        m.create_date,
+        m.id as addr_id,
+        m.full_address,
+        i.id as item_id,
+        i.item_name
+      from (
+          select
+            d.id,
+            d.demo_name,
+            d.demo_key,
+            d.create_date,
+            a.id as addr_id,
+            a.full_address
+          from demo d
+          left join demo_addr a on d.id = a.demo_id
+          where
+            d.user_id = #{userId}
+          limit #{start},#{pageSize}
+      ) m
+      left join demo_item i on m.id = i.demo_id
+
+    </select>
+  <select id="countDemoList" resultType="long">
+          select
+            count(1)
+          from demo d
+          where
+            d.user_id = #{userId}
+  </select>
+
 
 </mapper>

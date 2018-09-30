@@ -1,10 +1,11 @@
 package com.demo.dto.request.demo;
 
+import com.demo.dto.request.page.PageInfoReqDTO;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
-public class DemoReqDTO {
+public class DemoListReqDTO extends PageInfoReqDTO {
 
     private long id;
 

@@ -1,34 +1,34 @@
-package com.demo.bean.page;
+package com.demo.dto.response.page;
 
 /**
  * Created by Arthur on 2016/12/30 0030.
  */
-public class PageInfo {
+public class PageInfoRespDTO {
 
-    private long pageNum;
+    private int pageNum;
 
     private int pageSize;
 
     private long totalNum;
 
-    private long totalPages;
+    private int totalPages;
 
-    public PageInfo(){
+    public PageInfoRespDTO(){
 
     }
 
-    public PageInfo(long pageNum, int pageSize, long totalNum, long totalPages) {
+    public PageInfoRespDTO(int pageNum, int pageSize, long totalNum, int totalPages) {
         this.pageNum = pageNum;
         this.pageSize = pageSize;
         this.totalNum = totalNum;
         this.totalPages = totalPages;
     }
 
-    public long getPageNum() {
+    public int getPageNum() {
         return pageNum;
     }
 
-    public void setPageNum(long pageNum) {
+    public void setPageNum(int pageNum) {
         this.pageNum = pageNum;
     }
 
@@ -48,11 +48,11 @@ public class PageInfo {
         this.totalNum = totalNum;
     }
 
-    public long getTotalPages() {
+    public int getTotalPages() {
         return totalPages;
     }
 
-    public void setTotalPages(long totalPages) {
+    public void setTotalPages(int totalPages) {
         this.totalPages = totalPages;
     }
 }
