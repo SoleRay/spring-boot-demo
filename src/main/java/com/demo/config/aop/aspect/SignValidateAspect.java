@@ -1,4 +1,4 @@
-package com.demo.aop;
+package com.demo.config.aop.aspect;
 
 import com.demo.exception.SignException;
 import com.demo.util.sign.SignUtil;
