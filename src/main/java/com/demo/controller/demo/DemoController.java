@@ -34,9 +34,9 @@ public class DemoController {
     @PostMapping(value="/get",produces= MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Result get(@RequestBody DemoReqDTO param,@RequestHeader(value = "token", required = false) String token){
 
-        var demo = demoService.selectByPrimaryKey(param.getId());
+        Demo demo = demoService.selectByPrimaryKey(param.getId());
 
-        var dto = new DemoRespDTO();
+        DemoRespDTO dto = new DemoRespDTO();
         dto.setId(demo.getId());
         dto.setCreateDate(demo.getCreateDate());
 
