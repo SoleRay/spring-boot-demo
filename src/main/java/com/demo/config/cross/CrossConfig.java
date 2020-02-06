@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 /**
  * 解决跨域问题
  */
-@Configuration
+//@Configuration
 public class CrossConfig extends WebMvcConfigurationSupport {
 
     @Override

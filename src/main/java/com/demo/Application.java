@@ -1,8 +1,10 @@
 package com.demo;
 
+import com.demo.entity.demo.Demo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
 /**
@@ -18,6 +20,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 
 
 @tk.mybatis.spring.annotation.MapperScan(basePackages = "com.demo.dao")
+@EnableTransactionManagement
 @SpringBootApplication
 public class Application {
 

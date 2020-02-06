@@ -16,7 +16,7 @@ mybatis.type-aliases-package=classpath:com.demo.entity.*
 
 
 #service
-server.servlet.context-path=/demo
+server.servlet.context-path=/spring-boot-demo
 server.port=8080
 
 

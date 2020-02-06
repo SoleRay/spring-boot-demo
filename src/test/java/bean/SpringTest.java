@@ -9,6 +9,8 @@ public class SpringTest {
 
 //        String basePackage = "bean.processor";
 //        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(basePackage);
-        GenericApplicationContext context = new GenericApplicationContext();
+//        GenericApplicationContext context = new GenericApplicationContext();
+
+
     }
 }

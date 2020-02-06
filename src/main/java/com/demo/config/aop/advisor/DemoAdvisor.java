@@ -8,13 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+//@Configuration
 public class DemoAdvisor {
 
-    @Autowired
+//    @Autowired
     private DemoBeforeAdvice advice;
 
-    @Bean
+//    @Bean
     public Advisor getAdvisor(){
         AspectJExpressionPointcutAdvisor advisor = new AspectJExpressionPointcutAdvisor();
         advisor.setAdvice(advice);

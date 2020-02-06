@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes={Application.class})
 public class TransTest {
@@ -22,10 +24,8 @@ public class TransTest {
 
     @Test
     public void addDemo(){
-        Demo d = new Demo();
-        d.setDemoKey("color");
-        d.setDemoName("green");
-        demoService.insert(d);
+        Demo demo = new Demo();
+        demoService.add(demo);
     }
 
     @Test
