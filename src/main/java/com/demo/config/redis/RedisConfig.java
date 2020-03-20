@@ -4,8 +4,13 @@ import com.demo.bean.redis.ByteRedisTemplate;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.cache.RedisCacheConfiguration;
+import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.data.redis.cache.RedisCacheWriter;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -14,10 +19,11 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
+@EnableCaching
 public class RedisConfig {
 
     @Bean
-    public RedisTemplate redisTemplate(RedisConnectionFactory factory) {
+    public RedisTemplate redisTemplate(RedisConnectionFactory redisConnectionFactory) {
 
         RedisSerializer<String> stringSerializer = new StringRedisSerializer();
 
@@ -35,7 +41,7 @@ public class RedisConfig {
 
         template.setHashKeySerializer(stringSerializer);
         template.setHashValueSerializer(jacksonSerializer);
-        template.setConnectionFactory(factory);
+        template.setConnectionFactory(redisConnectionFactory);
         template.afterPropertiesSet();
 
         return template;
@@ -45,16 +51,22 @@ public class RedisConfig {
      * 用户存取二进制的value
      */
     @Bean
-    public ByteRedisTemplate byteRedisTemplate(RedisConnectionFactory factory) {
-        return new ByteRedisTemplate(factory);
+    public ByteRedisTemplate byteRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
+        return new ByteRedisTemplate(redisConnectionFactory);
     }
 
     @Bean
-    public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory factory) {
+    public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
         StringRedisTemplate stringRedisTemplate = new StringRedisTemplate();
-        stringRedisTemplate.setConnectionFactory(factory);
+        stringRedisTemplate.setConnectionFactory(redisConnectionFactory);
         return stringRedisTemplate;
     }
 
-
+    @Bean
+    public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
+        RedisCacheWriter redisCacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory);
+        RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig();
+        RedisCacheManager cacheManager = new RedisCacheManager(redisCacheWriter, redisCacheConfiguration);
+        return cacheManager;
+    }
 }

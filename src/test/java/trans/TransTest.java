@@ -4,6 +4,7 @@ import com.demo.Application;
 import com.demo.entity.demo.Demo;
 import com.demo.service.bus.BusService;
 import com.demo.service.demo.DemoService;
+import com.demo.service.tx.TxService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,12 @@ public class TransTest {
     private BusService busService;
 
     @Autowired
-    private DemoService demoService;
+    private TxService txService;
 
     @Test
     public void addDemo(){
         Demo demo = new Demo();
-        demoService.add(demo);
+        txService.add(demo);
     }
 
     @Test

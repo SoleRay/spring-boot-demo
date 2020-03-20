@@ -2,7 +2,7 @@ package com.demo.service.bus.impl;
 
 import com.demo.entity.demo.Demo;
 import com.demo.service.bus.BusService;
-import com.demo.service.demo.DemoService;
+import com.demo.service.tx.TxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,18 +11,18 @@ import org.springframework.transaction.annotation.Transactional;
 public class BusServiceImpl implements BusService {
 
     @Autowired
-    private DemoService demoService;
+    private TxService txService;
 
     @Transactional
     public void doBusinsess(){
         Demo d = new Demo();
         d.setDemoKey("color");
         d.setDemoName("blue");
-        demoService.add(d);
+        txService.add(d);
 
         d.setId(2L);
         d.setDemoName("purple");
-        demoService.change(d);
+        txService.change(d);
 
         int x = 1/0;
     }
@@ -33,11 +33,11 @@ public class BusServiceImpl implements BusService {
         Demo d = new Demo();
         d.setDemoKey("color");
         d.setDemoName("blue");
-        demoService.addWithNewTrans(d);
+        txService.addWithNewTrans(d);
 
         d.setId(2L);
         d.setDemoName("purple");
-        demoService.change(d);
+        txService.change(d);
 
         int x = 1/0;
     }
@@ -47,11 +47,11 @@ public class BusServiceImpl implements BusService {
         Demo d = new Demo();
         d.setDemoKey("color");
         d.setDemoName("blue");
-        demoService.addWithNESTED(d);
+        txService.addWithNESTED(d);
 
         d.setId(2L);
         d.setDemoName("purple");
-        demoService.change(d);
+        txService.change(d);
 
         int x = 1/0;
     }

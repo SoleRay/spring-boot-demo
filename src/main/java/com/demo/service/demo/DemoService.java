@@ -7,11 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface DemoService extends BaseService<Demo> {
 
-    void add(Demo demo);
+    void sayHello(Demo demo);
 
-    void addWithNewTrans(Demo demo);
-
-    void addWithNESTED(Demo demo);
-
-    void change(Demo demo);
 }

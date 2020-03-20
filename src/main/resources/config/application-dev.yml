@@ -8,7 +8,11 @@ spring:
   redis:
     database: 0
     host: 192.168.0.10
-    port: 6379
+    port: 26379
+    password: redis123456
+    sentinel:
+      master: mymaster
+      nodes: 192.168.0.11:26379,192.168.0.12:26379
 mybatis:
   mapper-locations: classpath*:com/demo/mapper/**/*.xml
   config-location: classpath:mybatis/mybatis-config.xml
