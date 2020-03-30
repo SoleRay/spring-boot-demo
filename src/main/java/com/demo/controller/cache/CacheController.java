@@ -7,7 +7,6 @@ import com.demo.util.resp.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -19,7 +18,19 @@ public class CacheController {
 
     @PostMapping(value="/findNameById")
     public Result findNameById(Long id){
-        String name = cacheService.findNameById(id);
-        return ResponseUtil.setSuccessDataResponse(name);
+        Demo demo = cacheService.findNameById(id);
+        return ResponseUtil.setSuccessDataResponse(demo);
+    }
+
+    @PostMapping(value="/deleteDemoById")
+    public Result deleteDemoById(Long id){
+        cacheService.deleteDemoById(id);
+        return ResponseUtil.setDefaultSuccessResponse();
+    }
+
+    @PostMapping(value="/updateDemo")
+    public Result updateDemo(Demo demo){
+        Demo result = cacheService.updateDemo(demo);
+        return ResponseUtil.setSuccessDataResponse(result);
     }
 }

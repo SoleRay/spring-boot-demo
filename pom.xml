@@ -7,11 +7,12 @@
   <groupId>com.demo</groupId>
   <artifactId>spring-boot-demo</artifactId>
   <packaging>jar</packaging>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0.0</version>
 
   <properties>
       <java.version>1.8</java.version>
       <targetJavaProject>${basedir}/src/main/java</targetJavaProject>
+
   </properties>
 
   <parent>
@@ -147,13 +148,22 @@
     </dependency>
 
     <dependency>
-      <groupId>org.redisson</groupId>
-      <artifactId>redisson-spring-boot-starter</artifactId>
-      <version>3.12.3</version>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.12</version>
+      <scope>provided</scope>
     </dependency>
+<!--    <dependency>-->
+<!--      <groupId>org.redisson</groupId>-->
+<!--      <artifactId>redisson-spring-boot-starter</artifactId>-->
+<!--      <version>3.12.3</version>-->
+<!--    </dependency>-->
+
   </dependencies>
 
   <build>
+    <finalName>spring-boot-demo</finalName>
+
     <resources>
       <resource>
         <directory>src/main/java</directory>

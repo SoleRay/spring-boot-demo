@@ -22,6 +22,12 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @EnableCaching
 public class RedisConfig {
 
+    /**
+     *
+     * RedisAutoConfiguration中有默认的配置
+     * 如果需要强化，则可以在这里进行覆盖
+     *
+     */
     @Bean
     public RedisTemplate redisTemplate(RedisConnectionFactory redisConnectionFactory) {
 
@@ -55,12 +61,6 @@ public class RedisConfig {
         return new ByteRedisTemplate(redisConnectionFactory);
     }
 
-    @Bean
-    public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
-        StringRedisTemplate stringRedisTemplate = new StringRedisTemplate();
-        stringRedisTemplate.setConnectionFactory(redisConnectionFactory);
-        return stringRedisTemplate;
-    }
 
     @Bean
     public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {

@@ -7,11 +7,15 @@ import tk.mybatis.mapper.annotation.ColumnType;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+/**
+ * 不实现Serializable接口，无法缓存对象到redis
+ */
 @Table(name = "tb_demo")
-public class Demo {
+public class Demo implements Serializable {
 
     @Id
     private Long id;

@@ -4,5 +4,9 @@ import com.demo.entity.demo.Demo;
 
 public interface CacheService {
 
-    String findNameById(Long id);
+    Demo findNameById(Long id);
+
+    void deleteDemoById(Long id);
+
+    Demo updateDemo(Demo demo);
 }

@@ -1,50 +1,44 @@
 package com.demo.controller.redis;
 
 import com.demo.bean.result.Result;
-import com.demo.service.redis.RedissonService;
 import com.demo.util.resp.ResponseUtil;
-import org.redisson.api.RLock;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Random;
-import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/redis")
 public class RedisController {
 
-    private static final Logger log = LoggerFactory.getLogger(RedisController.class);
-
     @Autowired
-    private RedissonService redissonService;
+    private RedisTemplate redisTemplate;
 
-    @RequestMapping(value = "/redisson/test")
-    public Result redissonTest() throws Exception {
+    @RequestMapping(value = "/set")
+    public Result set(String key,String value) throws Exception {
+        redisTemplate.opsForValue().set(key,value);
+        return ResponseUtil.setDefaultSuccessResponse();
+    }
 
-        String value = UUID.randomUUID().toString();
-        RLock lock = redissonService.getRLock(value);
-        try {
-            boolean bs = lock.tryLock(5, -1, TimeUnit.SECONDS);
-            if (bs) {
-                // 业务代码
-                log.info("进入业务代码: " + value);
-                Thread.sleep(20000);
-                log.info("hello: " + value);
-            } else {
-                Thread.sleep(300);
-            }
-        } catch (Exception e) {
-            log.error("", e);
-            lock.unlock();
-            throw e;
-        } finally {
-            lock.unlock();
+    @RequestMapping(value = "/get")
+    public Result get(String key) throws Exception {
+        Object value = redisTemplate.opsForValue().get(key);
+        return ResponseUtil.setSuccessDataResponse(value);
+    }
+
+    @RequestMapping(value = "/batchSet")
+    public Result batchSet(int loop) throws Exception {
+        for(int i=0;i<loop;i++){
+            redisTemplate.opsForValue().set(i+"",i+"");
+        }
+
+        return ResponseUtil.setDefaultSuccessResponse();
+    }
+
+    @RequestMapping(value = "/batchHSet")
+    public Result batchHSet(int loop) throws Exception {
+        for(int i=0;i<loop;i++){
+            redisTemplate.opsForHash().putIfAbsent("box","sub-"+i,i+"");
         }
         return ResponseUtil.setDefaultSuccessResponse();
     }
