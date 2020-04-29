@@ -2,7 +2,6 @@ package com.demo.controller.redis;
 
 import com.demo.bean.result.Result;
 import com.demo.service.redis.RedissonService;
-import com.demo.util.resp.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +39,6 @@ public class RedissonController {
 //        } finally {
 //            lock.unlock();
 //        }
-        return ResponseUtil.setDefaultSuccessResponse();
+        return Result.success();
     }
 }

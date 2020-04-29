@@ -16,37 +16,52 @@ package com.demo.bean.result;
  */
 public class Result<T> {
 
-	private int code; //编码
+	private String code; //编码
 
-	private String msg;  //结果说明
+	private String message;  //结果说明
 
 	private T data;//数据
 
-
-	public Result(int code, String msg) {
-		this(code,msg,null);
+	private Result(ResultCode resultCode) {
+		this(resultCode,null);
 	}
 
-	public Result(int code, String msg, T data) {
-		this.code = code;
-		this.msg = msg;
+	private Result(ResultCode resultCode, T data) {
+		this.code = resultCode.getCode();
+		this.message = resultCode.getMsg();
 		this.data = data;
 	}
 
-	public int getCode() {
+	public static Result success(){
+		return new Result(ResultCode.SUCCESS);
+	}
+
+	public static Result success(Object data){
+		return new Result(ResultCode.SUCCESS,data);
+	}
+
+	public static Result failure(ResultCode resultCode){
+		return new Result(resultCode);
+	}
+
+	public static Result failure(ResultCode resultCode,Object data){
+		return new Result(resultCode,data);
+	}
+
+	public String getCode() {
 		return code;
 	}
 
-	public void setCode(int code) {
+	public void setCode(String code) {
 		this.code = code;
 	}
 
-	public String getMsg() {
-		return msg;
+	public String getMessage() {
+		return message;
 	}
 
-	public void setMsg(String msg) {
-		this.msg = msg;
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 	public Object getData() {
