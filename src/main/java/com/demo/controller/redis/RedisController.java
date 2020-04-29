@@ -1,7 +1,6 @@
 package com.demo.controller.redis;
 
 import com.demo.bean.result.Result;
-import com.demo.util.resp.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,13 +16,13 @@ public class RedisController {
     @RequestMapping(value = "/set")
     public Result set(String key,String value) throws Exception {
         redisTemplate.opsForValue().set(key,value);
-        return ResponseUtil.setDefaultSuccessResponse();
+        return Result.success();
     }
 
     @RequestMapping(value = "/get")
     public Result get(String key) throws Exception {
         Object value = redisTemplate.opsForValue().get(key);
-        return ResponseUtil.setSuccessDataResponse(value);
+        return Result.success(value);
     }
 
     @RequestMapping(value = "/batchSet")
@@ -32,7 +31,7 @@ public class RedisController {
             redisTemplate.opsForValue().set(i+"",i+"");
         }
 
-        return ResponseUtil.setDefaultSuccessResponse();
+        return Result.success();
     }
 
     @RequestMapping(value = "/batchHSet")
@@ -40,6 +39,7 @@ public class RedisController {
         for(int i=0;i<loop;i++){
             redisTemplate.opsForHash().putIfAbsent("box","sub-"+i,i+"");
         }
-        return ResponseUtil.setDefaultSuccessResponse();
+        return Result.success();
     }
+
 }

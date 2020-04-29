@@ -12,7 +12,6 @@ import com.demo.dto.request.map.EntityMapInEntity;
 import com.demo.dto.request.map.SimpleMapInEntity;
 import com.demo.entity.demo.Demo;
 import com.demo.service.demo.DemoService;
-import com.demo.util.resp.ResponseUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +40,7 @@ public class DemoController {
     @PostMapping(value="/doSimpleProperty")
     public Result doSimpleProperty(Integer id, @RequestParam String str){
         Demo demo = demoService.selectByPrimaryKey(id);
-        return ResponseUtil.setSuccessDataResponse(demo);
+        return Result.success(demo);
     }
 
     /**
@@ -49,7 +48,7 @@ public class DemoController {
      */
     @PostMapping(value="/doSimpleArray")
     public Result doSimpleArray(String[] array){
-        return ResponseUtil.setDefaultSuccessResponse();
+        return Result.success();
     }
 
     /**
@@ -58,12 +57,12 @@ public class DemoController {
      */
     @PostMapping(value="/doSimpleArrayInEntity")
     public Result doSimpleArrayInEntity(SimpleArrayInEntity simpleArrayInEntity){
-        return ResponseUtil.setDefaultSuccessResponse();
+        return Result.success();
     }
 
 //    @PostMapping(value="/doEntityArray")
 //    public Result doEntityArray(Entity[] array){
-//        return ResponseUtil.setDefaultSuccessResponse();
+//        return Result.success();
 //    }
 
     /**
@@ -74,7 +73,7 @@ public class DemoController {
      */
     @PostMapping(value="/doEntityArrayInEntity")
     public Result doEntityArrayInEntity(EntityArrayInEntity entity){
-        return ResponseUtil.setDefaultSuccessResponse();
+        return Result.success();
     }
 
     /**
@@ -82,7 +81,7 @@ public class DemoController {
      */
     @PostMapping(value="/doSimpleList")
     public Result doSimpleList(/*@ModelAttribute(name = "nameList") */List<String> list){
-        return ResponseUtil.setDefaultSuccessResponse();
+        return Result.success();
     }
 
     /**
@@ -91,7 +90,7 @@ public class DemoController {
      */
     @PostMapping(value="/doSimpleListInEntity")
     public Result doSimpleListInEntity(SimpleListInEntity entity){
-        return ResponseUtil.setDefaultSuccessResponse();
+        return Result.success();
     }
 
     /**
@@ -102,7 +101,7 @@ public class DemoController {
      */
     @PostMapping(value="/doEntityListInEntity")
     public Result doEntityListInEntity(EntityListInEntity entity){
-        return ResponseUtil.setDefaultSuccessResponse();
+        return Result.success();
     }
 
     /**
@@ -111,7 +110,7 @@ public class DemoController {
      */
     @PostMapping(value="/doSimpleMap")
     public Result doSimpleMap(@RequestParam Map<String,String> map){
-        return ResponseUtil.setDefaultSuccessResponse();
+        return Result.success();
     }
 
 
@@ -121,7 +120,7 @@ public class DemoController {
      */
     @PostMapping(value="/doSimpleMapInEntity")
     public Result doSimpleMapInEntity(SimpleMapInEntity entity){
-        return ResponseUtil.setDefaultSuccessResponse();
+        return Result.success();
     }
 
     /**
@@ -132,7 +131,7 @@ public class DemoController {
      */
     @PostMapping(value="/doEntityMapInEntity")
     public Result doEntityMapInEntity(EntityMapInEntity entity){
-        return ResponseUtil.setDefaultSuccessResponse();
+        return Result.success();
     }
 
     /**
@@ -142,7 +141,7 @@ public class DemoController {
      */
     @PostMapping(value="/doEntity")
     public Result doEntity(Entity entity) {
-        return ResponseUtil.setSuccessDataResponse(entity);
+        return Result.success(entity);
     }
 
     /**
@@ -153,7 +152,7 @@ public class DemoController {
      */
     @PostMapping(value="/doEntityInEntity")
     public Result doEntityInEntity(EntityInEntity entity) {
-        return ResponseUtil.setSuccessDataResponse(entity);
+        return Result.success(entity);
     }
 
     /**
@@ -165,7 +164,7 @@ public class DemoController {
      */
     @PostMapping(value="/doJsonEntity",produces= MediaType.APPLICATION_JSON_VALUE)
     public Result doJsonEntity(@RequestBody Entity entity) {
-        return ResponseUtil.setSuccessDataResponse(entity);
+        return Result.success(entity);
     }
 
 
@@ -174,14 +173,14 @@ public class DemoController {
                         @RequestParam Map map,
                         @RequestHeader(value = "token", required = false) String token,
                         String string) {
-        return ResponseUtil.setSuccessDataResponse(param);
+        return Result.success(param);
     }
 
 
     @PostMapping(value="/doRequstAndResponse")
     public Result doRequstAndResponse(HttpServletRequest request, HttpServletResponse response){
 
-        return ResponseUtil.setDefaultSuccessResponse();
+        return Result.success();
     }
 
 //    @ModelAttribute
@@ -192,7 +191,7 @@ public class DemoController {
     @ModelAttribute
     public Result doModelMap(ModelMap modelMap){
 
-        return ResponseUtil.setDefaultSuccessResponse();
+        return Result.success();
     }
 
 }

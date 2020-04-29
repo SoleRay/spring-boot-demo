@@ -1,29 +1,53 @@
 package com.demo.exception;
 
+import com.demo.bean.result.ResultCode;
 
-
-/**
- */
 public class BusinessException extends RuntimeException {
 
-    private static final long serialVersionUID = 5660370852963326274L;
+    /**
+     * 结果码
+     */
+    private String code;
 
-    private int code;
+    /**
+     * 结果码描述
+     */
+    private String msg;
 
-    public BusinessException(int code, String message) {
-        super(message);
-        this.code = code;
+    /**
+     * 结果码枚举
+     */
+    private ResultCode resultCode;
+
+
+    public BusinessException(ResultCode resultCode) {
+        super(resultCode.getMsg());
+        this.code = resultCode.getCode();
+        this.msg = resultCode.getMsg();
+        this.resultCode = resultCode;
     }
 
-    public BusinessException(String message) {
-        super(message);
-    }
-
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public ResultCode getResultCode() {
+        return resultCode;
+    }
+
+    public void setResultCode(ResultCode resultCode) {
+        this.resultCode = resultCode;
     }
 }

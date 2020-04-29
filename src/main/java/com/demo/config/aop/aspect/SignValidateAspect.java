@@ -33,8 +33,8 @@ public class SignValidateAspect {
         Map<String, String[]> paramMap = request.getParameterMap();
 
         //校验参数
-        if(!SignUtil.checkSign(paramMap)){
-            throw new SignException("签名错误！");
-        }
+//        if(!SignUtil.checkSign(paramMap)){
+//            throw new SignException("签名错误！");
+//        }
     }
 }
