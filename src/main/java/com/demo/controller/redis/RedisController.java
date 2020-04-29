@@ -1,5 +1,6 @@
 package com.demo.controller.redis;
 
+import com.demo.anno.ResponseResult;
 import com.demo.bean.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@ResponseResult
 @RequestMapping("/redis")
 public class RedisController {
 
@@ -14,32 +16,28 @@ public class RedisController {
     private RedisTemplate redisTemplate;
 
     @RequestMapping(value = "/set")
-    public Result set(String key,String value) throws Exception {
+    public void set(String key,String value) throws Exception {
         redisTemplate.opsForValue().set(key,value);
-        return Result.success();
     }
 
     @RequestMapping(value = "/get")
-    public Result get(String key) throws Exception {
+    public Object get(String key) throws Exception {
         Object value = redisTemplate.opsForValue().get(key);
-        return Result.success(value);
+        return value;
     }
 
     @RequestMapping(value = "/batchSet")
-    public Result batchSet(int loop) throws Exception {
+    public void batchSet(int loop) throws Exception {
         for(int i=0;i<loop;i++){
             redisTemplate.opsForValue().set(i+"",i+"");
         }
-
-        return Result.success();
     }
 
     @RequestMapping(value = "/batchHSet")
-    public Result batchHSet(int loop) throws Exception {
+    public void batchHSet(int loop) throws Exception {
         for(int i=0;i<loop;i++){
             redisTemplate.opsForHash().putIfAbsent("box","sub-"+i,i+"");
         }
-        return Result.success();
     }
 
 }

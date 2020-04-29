@@ -1,7 +1,6 @@
-package com.demo.controller.exception;
+package com.demo.config.aop.handler;
 
 import com.demo.bean.result.ErrorResult;
-import com.demo.bean.result.Result;
 import com.demo.bean.result.ResultCode;
 import com.demo.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Slf4j
 @ControllerAdvice
-public class NewExceptionController {
+public class GlobalExceptionHandler {
 
     /**
      * 处理所有不可知异常

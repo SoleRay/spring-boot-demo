@@ -1,6 +1,6 @@
 package com.demo.controller.redis;
 
-import com.demo.bean.result.Result;
+import com.demo.anno.ResponseResult;
 import com.demo.service.redis.RedissonService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@ResponseResult
 @RequestMapping("/redisson")
 public class RedissonController {
 
@@ -18,7 +19,7 @@ public class RedissonController {
     private RedissonService redissonService;
 
     @RequestMapping(value = "/test")
-    public Result test() throws Exception {
+    public void test() throws Exception {
 
 //        String value = UUID.randomUUID().toString();
 //        RLock lock = redissonService.getRLock(value);
@@ -39,6 +40,5 @@ public class RedissonController {
 //        } finally {
 //            lock.unlock();
 //        }
-        return Result.success();
     }
 }

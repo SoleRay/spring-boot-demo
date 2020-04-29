@@ -1,6 +1,7 @@
-package com.demo.config.aop.aspect;
+package com.demo.config.aop.sigin;
 
-import com.demo.exception.SignException;
+import com.demo.bean.result.ResultCode;
+import com.demo.exception.BusinessException;
 import com.demo.util.sign.SignUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -15,12 +16,12 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
-//@Aspect
-//@Configuration
+@Aspect
 @Order(0)
-public class SignValidateAspect {
+@Configuration
+public class SignCheckAspect {
 
-    @Pointcut(value = "execution(public * com.demo.controller..*(..)) && @annotation(com.demo.anno.ValidateSign)")
+    @Pointcut(value = "execution(public * com.demo.controller..*(..)) && @annotation(com.demo.anno.SignCheck)")
     public void checkSign(){};
     
     @Before("checkSign()")
@@ -33,8 +34,8 @@ public class SignValidateAspect {
         Map<String, String[]> paramMap = request.getParameterMap();
 
         //校验参数
-//        if(!SignUtil.checkSign(paramMap)){
-//            throw new SignException("签名错误！");
-//        }
+        if(!SignUtil.checkSign(paramMap)){
+            throw new BusinessException(ResultCode.SIGN_ERROR);
+        }
     }
 }

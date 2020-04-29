@@ -25,7 +25,12 @@ public enum ResultCode {
     /**
      * 用户名不能为空
      */
-    USERNAME_EMPTY("0x10004", "username can not be empty");
+    USERNAME_EMPTY("0x10004", "username can not be empty"),
+
+    /**
+     * 签名错误
+     */
+    SIGN_ERROR("0x10005", "sign is not the same");
 
     /**
      * 结果码

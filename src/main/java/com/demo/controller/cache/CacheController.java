@@ -1,5 +1,6 @@
 package com.demo.controller.cache;
 
+import com.demo.anno.ResponseResult;
 import com.demo.bean.result.Result;
 import com.demo.entity.demo.Demo;
 import com.demo.service.cache.CacheService;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@ResponseResult
 @RequestMapping("/cache")
 public class CacheController {
 
@@ -16,20 +18,19 @@ public class CacheController {
     private CacheService cacheService;
 
     @PostMapping(value="/findNameById")
-    public Result findNameById(Long id){
+    public Demo findNameById(Long id){
         Demo demo = cacheService.findNameById(id);
-        return Result.success(demo);
+        return demo;
     }
 
     @PostMapping(value="/deleteDemoById")
-    public Result deleteDemoById(Long id){
+    public void deleteDemoById(Long id){
         cacheService.deleteDemoById(id);
-        return Result.success();
     }
 
     @PostMapping(value="/updateDemo")
-    public Result updateDemo(Demo demo){
-        Demo result = cacheService.updateDemo(demo);
-        return Result.success(result);
+    public Demo updateDemo(Demo demo){
+        Demo updateDemo = cacheService.updateDemo(demo);
+        return updateDemo;
     }
 }

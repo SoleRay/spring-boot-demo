@@ -1,12 +1,9 @@
 package com.demo.config.aop.advisor;
 
 
+import com.demo.config.aop.demo.DemoBeforeAdvice;
 import org.springframework.aop.Advisor;
 import org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 //@Configuration
 public class DemoAdvisor {
