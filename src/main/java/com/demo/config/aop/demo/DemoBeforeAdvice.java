@@ -4,7 +4,7 @@ import org.springframework.aop.MethodBeforeAdvice;
 import org.springframework.stereotype.Component;
 import java.lang.reflect.Method;
 
-//@Component
+@Component
 public class DemoBeforeAdvice implements MethodBeforeAdvice {
 
     @Override

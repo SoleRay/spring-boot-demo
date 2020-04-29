@@ -24,7 +24,7 @@ public class ResponseResultHandler implements ResponseBodyAdvice<Object> {
         ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = sra.getRequest();
         ResponseResult responseResultAnn = (ResponseResult) request.getAttribute(Constants.RESPONSE_RESULT_ANN);
-        return responseResultAnn == null ? true : false;
+        return responseResultAnn == null ? false : true;
     }
 
     @Override

@@ -20,7 +20,7 @@ public class DemoServiceImpl extends BaseServiceImpl<Demo> implements DemoServic
 
     @Override
     public void sayHello(Demo demo) {
-
+        System.out.println("hello,"+demo.getDemoName());
     }
 }
 

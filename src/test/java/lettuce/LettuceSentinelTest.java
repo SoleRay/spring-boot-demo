@@ -6,14 +6,10 @@ import io.lettuce.core.RedisURI;
 import io.lettuce.core.api.StatefulRedisConnection;
 import io.lettuce.core.api.sync.RedisCommands;
 import io.lettuce.core.codec.StringCodec;
-import io.lettuce.core.codec.Utf8StringCodec;
 import io.lettuce.core.masterreplica.MasterReplica;
 import io.lettuce.core.masterreplica.StatefulRedisMasterReplicaConnection;
-import io.lettuce.core.sentinel.api.StatefulRedisSentinelConnection;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springframework.data.redis.connection.RedisConnection;
-import org.springframework.data.redis.core.RedisConnectionUtils;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;

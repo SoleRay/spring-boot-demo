@@ -5,12 +5,13 @@ import com.demo.util.Constants;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 
-public class ResultInterceptor implements HandlerInterceptor {
+public class ResultInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)  {
@@ -24,16 +25,6 @@ public class ResultInterceptor implements HandlerInterceptor {
                 request.setAttribute(Constants.RESPONSE_RESULT_ANN,method.getAnnotation(ResponseResult.class));
             }
         }
-        return false;
-    }
-
-    @Override
-    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object handler, ModelAndView modelAndView)  {
-
-    }
-
-    @Override
-    public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object handler, Exception e)  {
-
+        return true;
     }
 }
