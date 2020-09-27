@@ -15,8 +15,8 @@ public class RedissonController {
 
     private static final Logger log = LoggerFactory.getLogger(RedissonController.class);
 
-    @Autowired
-    private RedissonService redissonService;
+//    @Autowired
+//    private RedissonService redissonService;
 
     @RequestMapping(value = "/test")
     public void test() throws Exception {
