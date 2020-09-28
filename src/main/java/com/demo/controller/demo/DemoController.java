@@ -20,7 +20,7 @@ public class DemoController {
     private DemoService demoService;
 
     @PostMapping(value="/selectDemo")
-    public Demo selectDemo(String id){
+    public Demo selectDemo(Integer id){
         Demo demo = demoService.selectByPrimaryKey(id);
         return demo;
     }

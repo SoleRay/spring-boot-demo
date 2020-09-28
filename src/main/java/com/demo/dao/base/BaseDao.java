@@ -1,11 +1,8 @@
-package com.demo.service.base;
+package com.demo.dao.base;
 
-import java.util.List;
+import com.demo.entity.demo.Demo;
 
-/**
- * Created by Administrator on 2017-1-3.
- */
-public interface BaseService<T>  {
+public interface BaseDao<T> {
 
     int deleteByPrimaryKey(Integer id);
 
