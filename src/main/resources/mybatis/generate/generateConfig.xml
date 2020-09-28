@@ -34,9 +34,18 @@
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
-        <table tableName="tb_demo"
-               domainObjectName="demo.Demo"
-               mapperName="demo.DemoDao"
+<!--        <table tableName="tb_demo"-->
+<!--               domainObjectName="demo.Demo"-->
+<!--               mapperName="demo.DemoDao"-->
+<!--               enableCountByExample="false"-->
+<!--               enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false">-->
+<!--        </table>-->
+        <table tableName="tb_box"
+               domainObjectName="box.Box"
+               mapperName="box.BoxDao"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"
