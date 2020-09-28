@@ -39,19 +39,6 @@ import java.util.List;
 @EnableCaching
 public class RedisConfig {
 
-
-    /**
-     *  基于redis自动配置，设置读写分离
-     */
-//    @Bean
-//    public LettuceClientConfigurationBuilderCustomizer lettuceClientConfigurationBuilderCustomizer(){
-//
-//        return clientConfigurationBuilder ->{
-//            clientConfigurationBuilder.readFrom(ReadFrom.REPLICA);
-//        };
-//
-//    }
-
     /**
      *  覆盖redis自动配置下的RedisTemplate
      */
