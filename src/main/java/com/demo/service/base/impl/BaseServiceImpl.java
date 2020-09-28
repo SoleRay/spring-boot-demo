@@ -3,7 +3,6 @@ package com.demo.service.base.impl;
 import com.demo.dao.base.BaseDao;
 import com.demo.service.base.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
  *
