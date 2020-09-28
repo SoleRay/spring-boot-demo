@@ -8,13 +8,12 @@ import org.springframework.stereotype.Service;
 /**
  *
  */
-@Service
-public abstract class BaseServiceImpl<T> implements BaseService<T> {
+public abstract class BaseServiceImpl<K extends BaseDao<T>,T> implements BaseService<T> {
 
     //利用spring4.0新特性，泛型注入
     //必须用@Autowired而不是@Resource
     @Autowired
-    private BaseDao<T> baseDao;
+    private K baseDao;
 
     @Override
     public int deleteByPrimaryKey(Integer id) {
