@@ -43,16 +43,24 @@
 <!--               enableSelectByExample="false"-->
 <!--               selectByExampleQueryId="false">-->
 <!--        </table>-->
-        <table tableName="tb_box"
-               domainObjectName="box.Box"
-               mapperName="box.BoxDao"
+<!--        <table tableName="tb_box"-->
+<!--               domainObjectName="box.Box"-->
+<!--               mapperName="box.BoxDao"-->
+<!--               enableCountByExample="false"-->
+<!--               enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false">-->
+<!--        </table>-->
+        <table tableName="tb_user"
+               domainObjectName="user.User"
+               mapperName="user.UserDao"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
-
 
     </context>
 </generatorConfiguration>

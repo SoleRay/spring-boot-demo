@@ -12,7 +12,7 @@ public abstract class BaseServiceImpl<K extends BaseDao<T>,T> implements BaseSer
     //利用spring4.0新特性，泛型注入
     //必须用@Autowired而不是@Resource
     @Autowired
-    private K baseDao;
+    protected K baseDao;
 
     @Override
     public int deleteByPrimaryKey(Integer id) {
@@ -43,4 +43,5 @@ public abstract class BaseServiceImpl<K extends BaseDao<T>,T> implements BaseSer
     public int updateByPrimaryKey(T record) {
         return baseDao.updateByPrimaryKey(record);
     }
+
 }
