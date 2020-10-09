@@ -24,6 +24,12 @@ import java.io.IOException;
 @EnableWebSecurity
 public class SecurityConfigORM extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private SecurityAuthenticationProvider securityAuthenticationProvider;
+
+    @Autowired
+    private SecurityUserDetailsService securityUserDetailsService;
+
     @Override
     public void configure(WebSecurity web) throws Exception {
         //静态资源放行，建议在这里配，这里是第一层。
@@ -62,8 +68,7 @@ public class SecurityConfigORM extends WebSecurityConfigurerAdapter {
 
     }
 
-    @Autowired
-    private UserServiceImpl userService;
+
 
     /**
      * 权限管理
@@ -73,20 +78,7 @@ public class SecurityConfigORM extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         //用了自定义的UserDetailsService以后，就脱离了security自带的UserDetailsService
-        auth.userDetailsService(getSecurityUserDetailsService())
-        .and().authenticationProvider(authenticationProvider());
+        auth.userDetailsService(securityUserDetailsService)
+        .and().authenticationProvider(securityAuthenticationProvider);
     }
-
-    @Bean
-    protected SecurityUserDetailsService getSecurityUserDetailsService(){
-        return new SecurityUserDetailsService();
-    }
-
-    @Bean
-    protected AuthenticationProvider authenticationProvider(){
-        AuthenticationProvider authenticationProvider = new SecurityAuthenticationProvider();
-        return authenticationProvider;
-    }
-
-
 }
