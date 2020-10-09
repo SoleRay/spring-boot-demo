@@ -5,4 +5,5 @@ import com.demo.entity.user.User;
 
 public interface UserDao extends BaseDao<User> {
 
+    User selectByUserName(String username);
 }

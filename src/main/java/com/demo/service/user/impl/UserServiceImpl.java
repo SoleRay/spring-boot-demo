@@ -16,4 +16,9 @@ public class UserServiceImpl extends BaseServiceImpl<UserDao, User> implements U
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return null;
     }
+
+    @Override
+    public User selectByUserName(String username) {
+        return baseDao.selectByUserName(username);
+    }
 }
