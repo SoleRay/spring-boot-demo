@@ -120,10 +120,10 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="selectByUserName" parameterType="com.demo.entity.user.User">
+  <select id="selectByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from tb_user
-    where id = #{username,jdbcType=VARCHAR}
+    where username = #{username,jdbcType=VARCHAR}
   </select>
 </mapper>

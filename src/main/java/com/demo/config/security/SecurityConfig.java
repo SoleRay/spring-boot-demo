@@ -3,12 +3,10 @@ package com.demo.config.security;
 import com.demo.service.user.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
@@ -25,10 +23,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.io.IOException;
-import java.util.Collections;
 
-@Configuration
-@EnableWebSecurity
+//@Configuration
+//@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
@@ -48,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().formLogin()
                 .loginPage("/login.html")
                 .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/")//登陆失败后的页面
+                .defaultSuccessUrl("/")//登陆成功后的页面
                 .failureForwardUrl("/login.html?error")//登陆失败后的页面
                 .failureHandler(new AuthenticationFailureHandler() { //登陆失败的所有需求都可以在这里做
                     @Override
@@ -68,8 +65,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
-    @Autowired
-    private UserServiceImpl userService;
 
     /**
      * 权限管理
@@ -79,8 +74,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         //用了自定义的UserDetailsService以后，就脱离了security自带的UserDetailsService
-        auth.userDetailsService(userService)
-        .and().authenticationProvider(new MyAuthenticationProvider());
+        auth.userDetailsService(getSecurityUserDetailsService())
+        .and().authenticationProvider(new SecurityAuthenticationProvider());
+    }
+
+    @Bean
+    protected SecurityUserDetailsService getSecurityUserDetailsService(){
+        return new SecurityUserDetailsService();
     }
 
     @Bean
