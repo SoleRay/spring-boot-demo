@@ -9,10 +9,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.util.Collections;
 
 @Component
-public class SecurityUserDetailsService implements UserDetailsService {
+public class SecurityUserDetailsService implements UserDetailsService, Serializable {
 
     @Autowired
     private UserService userService;
