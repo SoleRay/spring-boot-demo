@@ -1,6 +1,7 @@
 package com.demo.config.security;
 
 import com.alibaba.fastjson.JSON;
+import com.demo.util.Constants;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -61,6 +62,11 @@ public class SecurityConfigORM extends WebSecurityConfigurerAdapter {
                         String json = "{\"code\": 0,\"message\": \"ok\"}";
                         response.setContentType("text/json; charset=utf-8");
                         response.getWriter().print(JSON.toJSON(json));
+
+                        //存放到session中
+                        SecurityUserDetail userDetail = (SecurityUserDetail) authentication.getPrincipal();
+                        request.getSession().setAttribute(Constants.SESSION_USER,userDetail);
+
                     }
                 })
 //                .defaultSuccessUrl("/")//登陆成功后的页面

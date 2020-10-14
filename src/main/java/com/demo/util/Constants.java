@@ -10,4 +10,6 @@ public class Constants {
     public static final String SENSITIVE_SYMBOL = "****";
 
     public static final String RESPONSE_RESULT_ANN = "RESPONSE-RESULT-ANN";
+
+    public static final String SESSION_USER = "SESSION_USER";
 }
