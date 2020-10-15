@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 
-//@Configuration
+@Configuration
 public class ListenerConfig {
 
     @Bean
@@ -15,11 +15,4 @@ public class ListenerConfig {
         servletListenerRegistrationBean.setListener(new DemoListener());
         return servletListenerRegistrationBean;
     }
-
-//    @Bean
-//    public ServletListenerRegistrationBean registerHttpSessionEventPublisher(){
-//        ServletListenerRegistrationBean servletListenerRegistrationBean = new ServletListenerRegistrationBean();
-//        servletListenerRegistrationBean.setListener(new HttpSessionEventPublisher());
-//        return servletListenerRegistrationBean;
-//    }
 }
