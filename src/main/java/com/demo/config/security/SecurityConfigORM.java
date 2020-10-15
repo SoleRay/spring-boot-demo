@@ -5,8 +5,8 @@ import com.demo.util.Constants;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -14,16 +14,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
-import org.springframework.security.web.session.ConcurrentSessionFilter;
-import org.springframework.security.web.session.SessionInformationExpiredEvent;
-import org.springframework.security.web.session.SessionInformationExpiredStrategy;
-import org.springframework.security.web.session.SimpleRedirectSessionInformationExpiredStrategy;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -53,30 +48,9 @@ public class SecurityConfigORM extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/box/**").hasIpAddress("127.0.0.1");//来自127.0.0.1的请求，如果匹配到"/box",那就可以不登录,直接访问
-
-//        SessionInformationExpiredStrategy sessionInformationExpiredStrategy = new SessionInformationExpiredStrategy() {
-//            @Override
-//            public void onExpiredSessionDetected(SessionInformationExpiredEvent event) throws IOException, ServletException {
-//                String json = "{\"code\": 2,\"message\": \"sessionExpired\"}";
-//
-//                HttpServletResponse response = event.getResponse();
-//                response.setContentType("text/json; charset=utf-8");
-//                response.getWriter().print(JSON.toJSON(json));
-//            }
-//        };
-//        ConcurrentSessionFilter concurrentSessionFilter = new ConcurrentSessionFilter(new SessionRegistryImpl(), sessionInformationExpiredStrategy);
-
-//        UsernamePasswordAuthenticationFilter usernamePasswordAuthenticationFilter = new UsernamePasswordAuthenticationFilter();
-//        usernamePasswordAuthenticationFilter.setSessionAuthenticationStrategy();
-//        usernamePasswordAuthenticationFilter.setAuthenticationManager();
-
-//        http.addFilter(concurrentSessionFilter);
-
-
-        //这种方式适合单机或者集群的，分布式不用这种方式
-        http.authorizeRequests()
-                .anyRequest().authenticated()//所有请求都需要认证，这个和下面放行匹配是冲突的
+                .antMatchers("/box/**").hasIpAddress("127.0.0.1")//来自127.0.0.1的请求，如果匹配到"/box",那就可以不登录,直接访问
+                .and().authorizeRequests()
+                .anyRequest().authenticated()
                 .and().formLogin()//浏览器中输入，http://localhost:8081/spring-boot-demo/login，默认登陆页
                 //.loginPage("mylogin.html") //自定义登录页，使用自定义登陆界面以后，登出界面就要重新定义
                 .loginProcessingUrl("/login")//登陆的post接口
@@ -85,15 +59,9 @@ public class SecurityConfigORM extends WebSecurityConfigurerAdapter {
                     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
                         //登陆成功处理，如果前后端分离，可以直接用于json返回
 
-                        Object principal = authentication.getPrincipal();
-                        request.getSession().setAttribute(Constants.SESSION_USER,principal);
-
                         String json = "{\"code\": 0,\"message\": \"ok\"}";
                         response.setContentType("text/json; charset=utf-8");
                         response.getWriter().print(JSON.toJSON(json));
-
-
-
                     }
                 })
 //                .defaultSuccessUrl("/")//登陆成功后的页面
@@ -144,6 +112,4 @@ public class SecurityConfigORM extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(securityUserDetailsService)
         .and().authenticationProvider(securityAuthenticationProvider);
     }
-
-
 }
