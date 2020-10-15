@@ -5,6 +5,7 @@ import com.demo.util.Constants;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
@@ -46,11 +48,9 @@ public class SecurityConfigORM extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/box/**").hasIpAddress("127.0.0.1");//来自127.0.0.1的请求，如果匹配到"/box",那就可以不登录,直接访问
-
-        //这种方式适合单机或者集群的，分布式不用这种方式
-        http.authorizeRequests()
-                .anyRequest().authenticated()//所有请求都需要认证，这个和下面放行匹配是冲突的
+                .antMatchers("/box/**").hasIpAddress("127.0.0.1")//来自127.0.0.1的请求，如果匹配到"/box",那就可以不登录,直接访问
+                .and().authorizeRequests()
+                .anyRequest().authenticated()
                 .and().formLogin()//浏览器中输入，http://localhost:8081/spring-boot-demo/login，默认登陆页
                 //.loginPage("mylogin.html") //自定义登录页，使用自定义登陆界面以后，登出界面就要重新定义
                 .loginProcessingUrl("/login")//登陆的post接口
@@ -62,11 +62,6 @@ public class SecurityConfigORM extends WebSecurityConfigurerAdapter {
                         String json = "{\"code\": 0,\"message\": \"ok\"}";
                         response.setContentType("text/json; charset=utf-8");
                         response.getWriter().print(JSON.toJSON(json));
-
-                        //存放到session中
-                        SecurityUserDetail userDetail = (SecurityUserDetail) authentication.getPrincipal();
-                        request.getSession().setAttribute(Constants.SESSION_USER,userDetail);
-
                     }
                 })
 //                .defaultSuccessUrl("/")//登陆成功后的页面

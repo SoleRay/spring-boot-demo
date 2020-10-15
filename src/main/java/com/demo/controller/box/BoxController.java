@@ -21,4 +21,5 @@ public class BoxController {
         Box box = boxService.selectByPrimaryKey(id);
         return box;
     }
+
 }
