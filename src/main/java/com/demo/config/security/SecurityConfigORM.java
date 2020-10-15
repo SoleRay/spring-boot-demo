@@ -1,12 +1,15 @@
 package com.demo.config.security;
 
 import com.alibaba.fastjson.JSON;
+import com.demo.bean.session.SessionUser;
 import com.demo.util.Constants;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -15,6 +18,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -32,8 +37,8 @@ public class SecurityConfigORM extends WebSecurityConfigurerAdapter {
     @Autowired
     private SecurityAuthenticationProvider securityAuthenticationProvider;
 
-    @Autowired
-    private SecurityUserDetailsService securityUserDetailsService;
+//    @Autowired
+//    private SecurityUserDetailsService securityUserDetailsService;
 
     @Override
     public void configure(WebSecurity web) throws Exception {
@@ -58,6 +63,7 @@ public class SecurityConfigORM extends WebSecurityConfigurerAdapter {
                     @Override
                     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
                         //登陆成功处理，如果前后端分离，可以直接用于json返回
+                        request.getSession().setAttribute(Constants.SESSION_USER,authentication.getPrincipal());
 
                         String json = "{\"code\": 0,\"message\": \"ok\"}";
                         response.setContentType("text/json; charset=utf-8");
@@ -101,15 +107,19 @@ public class SecurityConfigORM extends WebSecurityConfigurerAdapter {
 
 
 
+
     /**
-     * 权限管理
-     * @param auth
-     * @throws Exception
+     *  想要使用数据库来进行验证。有以下几种方式：
+     *  1.自定义userDetailsService，Spring Security默认使用DaoAuthenticationProvider
+     *  2.自定义AuthenticationProvider，重写authenticate()方法。
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //用了自定义的UserDetailsService以后，就脱离了security自带的UserDetailsService
-        auth.userDetailsService(securityUserDetailsService)
-        .and().authenticationProvider(securityAuthenticationProvider);
+
+        //1.自定义userDetailsService，只控制从数据库获取用户的流程，默认流程走DaoAuthenticationProvider
+//        auth.userDetailsService(securityUserDetailsService);
+
+        //2.自定义AuthenticationProvider，控制整个认证流程
+        auth.authenticationProvider(securityAuthenticationProvider);
     }
 }
