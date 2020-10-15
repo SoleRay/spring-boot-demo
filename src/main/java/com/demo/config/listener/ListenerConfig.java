@@ -4,6 +4,7 @@ import com.demo.listener.DemoListener;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 //@Configuration
 public class ListenerConfig {
@@ -14,4 +15,11 @@ public class ListenerConfig {
         servletListenerRegistrationBean.setListener(new DemoListener());
         return servletListenerRegistrationBean;
     }
+
+//    @Bean
+//    public ServletListenerRegistrationBean registerHttpSessionEventPublisher(){
+//        ServletListenerRegistrationBean servletListenerRegistrationBean = new ServletListenerRegistrationBean();
+//        servletListenerRegistrationBean.setListener(new HttpSessionEventPublisher());
+//        return servletListenerRegistrationBean;
+//    }
 }
