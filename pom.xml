@@ -71,18 +71,6 @@
       <artifactId>spring-boot-starter-jdbc</artifactId>
     </dependency>
 
-    <!--spring session 存到redis -->
-    <dependency>
-      <groupId>org.springframework.session</groupId>
-      <artifactId>spring-session-data-redis</artifactId>
-    </dependency>
-
-    <!--spring session 存到redis -->
-    <dependency>
-      <groupId>org.springframework.session</groupId>
-      <artifactId>spring-session-data-redis</artifactId>
-    </dependency>
-
     <!--mybatis start ************  -->
 
     <!--通用mybatis 和 spring boot的整合 -->
