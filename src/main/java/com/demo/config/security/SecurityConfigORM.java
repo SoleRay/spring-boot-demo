@@ -19,6 +19,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -35,10 +36,10 @@ import java.io.IOException;
 public class SecurityConfigORM extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private SecurityAuthenticationProvider securityAuthenticationProvider;
+//    private SecurityAuthenticationProvider securityAuthenticationProvider;
 
 //    @Autowired
-//    private SecurityUserDetailsService securityUserDetailsService;
+    private SecurityUserDetailsService securityUserDetailsService;
 
     @Override
     public void configure(WebSecurity web) throws Exception {
@@ -63,6 +64,11 @@ public class SecurityConfigORM extends WebSecurityConfigurerAdapter {
                     @Override
                     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
                         //登陆成功处理，如果前后端分离，可以直接用于json返回
+
+                        /**
+                         * 1.自定义userDetailsService时，Principal = UserDetails
+                         * 2.自定义AuthenticationProvider，Principal 由用户自定义。
+                         */
                         request.getSession().setAttribute(Constants.SESSION_USER,authentication.getPrincipal());
 
                         String json = "{\"code\": 0,\"message\": \"ok\"}";
@@ -106,20 +112,32 @@ public class SecurityConfigORM extends WebSecurityConfigurerAdapter {
     }
 
 
+    /**
+     * 自定义userDetailsService时，需要配置
+     */
+    @Bean
+    protected PasswordEncoder passwordEncoder(){
+
+        return new BCryptPasswordEncoder(11);
+    }
 
 
     /**
      *  想要使用数据库来进行验证。有以下几种方式：
-     *  1.自定义userDetailsService，Spring Security默认使用DaoAuthenticationProvider
-     *  2.自定义AuthenticationProvider，重写authenticate()方法。
+     *  1.自定义userDetailsService，实现loadUserByUsername()方法，Spring Security默认使用DaoAuthenticationProvider
+     *  2.自定义AuthenticationProvider，实现authenticate()方法。
+     *
+     *  需要注意的是：DaoAuthenticationProvider默认返回的是UsernamePasswordAuthenticationToken，
+     *  它的principal，默认是自定义userDetailsService返回的对象，默认为UserDetails接口的子类
+     *
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
         //1.自定义userDetailsService，只控制从数据库获取用户的流程，默认流程走DaoAuthenticationProvider
-//        auth.userDetailsService(securityUserDetailsService);
+        auth.userDetailsService(securityUserDetailsService);
 
         //2.自定义AuthenticationProvider，控制整个认证流程
-        auth.authenticationProvider(securityAuthenticationProvider);
+//        auth.authenticationProvider(securityAuthenticationProvider);
     }
 }
