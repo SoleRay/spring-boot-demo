@@ -16,8 +16,8 @@ public class HiController {
 
     @GetMapping
     public String sayHi(HttpSession session){
-        UserDetails sessionUser = (UserDetails) session.getAttribute(Constants.SESSION_USER);
-//        SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
+//        UserDetails sessionUser = (UserDetails) session.getAttribute(Constants.SESSION_USER);
+        SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER);
         System.out.println(sessionUser.getUsername());
         return "hi";
     }

@@ -36,10 +36,10 @@ import java.io.IOException;
 public class SecurityConfigORM extends WebSecurityConfigurerAdapter {
 
     @Autowired
-//    private SecurityAuthenticationProvider securityAuthenticationProvider;
+    private SecurityAuthenticationProvider securityAuthenticationProvider;
 
 //    @Autowired
-    private SecurityUserDetailsService securityUserDetailsService;
+//    private SecurityUserDetailsService securityUserDetailsService;
 
     @Override
     public void configure(WebSecurity web) throws Exception {
@@ -135,9 +135,9 @@ public class SecurityConfigORM extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
         //1.自定义userDetailsService，只控制从数据库获取用户的流程，默认流程走DaoAuthenticationProvider
-        auth.userDetailsService(securityUserDetailsService);
+//        auth.userDetailsService(securityUserDetailsService);
 
         //2.自定义AuthenticationProvider，控制整个认证流程
-//        auth.authenticationProvider(securityAuthenticationProvider);
+        auth.authenticationProvider(securityAuthenticationProvider);
     }
 }
