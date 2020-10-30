@@ -19,8 +19,6 @@ import org.springframework.http.MediaType;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -159,10 +157,6 @@ public class SpringMvcParamController {
     }
 
 
-    @PostMapping(value="/doRequstAndResponse")
-    public void doRequstAndResponse(HttpServletRequest request, HttpServletResponse response){
-
-    }
 
 //    @ModelAttribute
 //    public void preModel(int id, String name, Model model){

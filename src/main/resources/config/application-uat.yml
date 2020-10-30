@@ -23,7 +23,7 @@ mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   type-aliases-package: classpath:com.demo.entity.*
 logging:
-  config: classpath:log4j2.xml
+  config: classpath:log4j2.xml.bak
 server:
   servlet:
     context-path: /spring-boot-demo
