@@ -1,6 +1,6 @@
-package com.config;
+package com.demo.config;
 
-import com.config.interfaces.BeanConfiguration;
+import com.demo.config.interfaces.BeanConfiguration;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
