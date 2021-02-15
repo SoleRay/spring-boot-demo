@@ -1,6 +1,7 @@
 package com.demo.config.interfaces;
 
-import com.demo.bean.Box;
+import com.demo.config.imports.selector.bean.Box;
+import com.demo.config.interfaces.bean.InterfaceBean;
 import org.springframework.context.annotation.Bean;
 
 
@@ -12,8 +13,8 @@ import org.springframework.context.annotation.Bean;
  */
 public interface InterfaceConfiguration {
 
-    @Bean("box")
-    default Box getApple(){
-        return new Box();
+    @Bean
+    default InterfaceBean interfaceBean(){
+        return new InterfaceBean();
     }
 }

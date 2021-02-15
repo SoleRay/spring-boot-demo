@@ -12,12 +12,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 所以这里的@ComponentScan已经注释掉了
  *
  */
-
-
 @SpringBootApplication
-public class Application {
+public class Application  {
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
+
 }

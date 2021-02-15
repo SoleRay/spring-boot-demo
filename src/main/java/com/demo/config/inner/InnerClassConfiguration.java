@@ -1,6 +1,7 @@
 package com.demo.config.inner;
 
-import com.demo.bean.Apple;
+import com.demo.config.imports.selector.bean.Apple;
+import com.demo.config.inner.bean.InnerBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -21,9 +22,9 @@ public class InnerClassConfiguration {
 
     class InnerBeanConfiguration{
 
-        @Bean("box")
-        public Apple getApple(){
-            return new Apple();
+        @Bean
+        public InnerBean innerBean(){
+            return new InnerBean();
         }
     }
 }
