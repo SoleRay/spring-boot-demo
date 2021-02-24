@@ -10,7 +10,7 @@ public enum ResultCode {
     /**
      * 未知错误
      */
-    UNKNOWN_ERROR("0x10001", "unkonwn error"),
+    INTERNAL_ERROR("0x10001", "internal error"),
 
     /**
      * 用户名错误或不存在
