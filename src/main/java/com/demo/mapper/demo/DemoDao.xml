@@ -94,6 +94,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.demo.entity.demo.Demo">
     <!--
       WARNING - @mbg.generated
@@ -130,4 +131,14 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <insert id="batchInsertDemos">
+      INSERT INTO tb_demo (id, demo_key, demo_name, create_date, update_time)
+      VALUES
+      <foreach collection ="list" item="demo" separator=",">
+        (#{demo.id,jdbcType=INTEGER}, #{demo.demoKey,jdbcType=VARCHAR}, #{demo.demoName,jdbcType=VARCHAR},
+        #{demo.createDate,jdbcType=TIMESTAMP}, #{demo.updateTime,jdbcType=TIMESTAMP})
+      </foreach >
+  </insert>
+
 </mapper>
