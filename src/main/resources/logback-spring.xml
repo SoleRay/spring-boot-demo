@@ -1,29 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+
+
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>app.log</file>
+        <file>demo.log</file>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%-5level] [%logger{40}:%line] - %msg%n</pattern>
         </encoder>
     </appender>
-    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-        <layout class="ch.qos.logback.classic.PatternLayout">
+    <appender name="ERROR_FILE" class="ch.qos.logback.core.FileAppender">
+        <file>error.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%-5level] [%logger{40}:%line] - %msg%n</pattern>
-        </layout>
-        <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
-            <evaluator class="ch.qos.logback.classic.boolex.OnMarkerEvaluator">
-                <marker>time</marker>
-            </evaluator>
-            <onMismatch>DENY</onMismatch>
-            <onMatch>ACCEPT</onMatch>
-        </filter>
+        </encoder>
     </appender>
 
-    <appender name="ASYNCFILE" class="ch.qos.logback.classic.AsyncAppender">
-        <appender-ref ref="FILE"/>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </layout>
     </appender>
+
+    <logger name="spring.boot.demo.logging" level="ERROR" additivity="false">
+        <appender-ref ref="ERROR_FILE"/>
+    </logger>
+<!--    <appender name="ASYNCFILE" class="ch.qos.logback.classic.AsyncAppender">-->
+<!--        <appender-ref ref="FILE"/>-->
+<!--    </appender>-->
     <root level="INFO">
-        <appender-ref ref="ASYNCFILE"/>
+<!--        <appender-ref ref="ASYNCFILE"/>-->
+        <appender-ref ref="FILE"/>
         <appender-ref ref="CONSOLE"/>
     </root>
 </configuration>
