@@ -3,8 +3,15 @@
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
     <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
 
-    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>demo.log</file>
+    <appender name="INFO_FILE" class="ch.qos.logback.core.FileAppender">
+        <file>info.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%-5level] [%logger{40}:%line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="DEBUG_FILE" class="ch.qos.logback.core.FileAppender">
+        <file>debug.log</file>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%-5level] [%logger{40}:%line] - %msg%n</pattern>
         </encoder>
@@ -16,15 +23,13 @@
         </layout>
     </appender>
 
-
-    <appender name="ASYNCFILE" class="ch.qos.logback.classic.AsyncAppender">
-        <appender-ref ref="FILE"/>
-        <queueSize>2048</queueSize>
-        <discardingThreshold>100</discardingThreshold>
-    </appender>
+    <!--临时开启debug 包的路径一定要注意，太大的话，会覆盖root的部分INFO日志-->
+    <logger name="com.demo.controller" level="DEBUG" additivity="false" >
+        <appender-ref ref="DEBUG_FILE"/>
+    </logger>
 
     <root level="INFO">
-        <appender-ref ref="FILE"/>
+        <appender-ref ref="INFO_FILE"/>
         <appender-ref ref="CONSOLE"/>
     </root>
 </configuration>

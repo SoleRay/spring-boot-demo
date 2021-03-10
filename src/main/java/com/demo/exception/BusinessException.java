@@ -4,6 +4,7 @@ import com.demo.bean.result.ResultCode;
 
 public class BusinessException extends RuntimeException {
 
+
     /**
      * 结果码
      */
