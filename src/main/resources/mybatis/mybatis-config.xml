@@ -24,7 +24,7 @@
         <!--设置超时时间，它决定驱动等待一个数据库响应的时间。 系统默认值是null，设置只是为了展示出来 -->
         <setting name="defaultStatementTimeout" value="25000" />
         <!--打印SQL -->
-        <setting name="logImpl" value="STDOUT_LOGGING" />
+<!--        <setting name="logImpl" value="STDOUT_LOGGING" />-->
     </settings>
     <!--联表一对多查询时，返回的总条数不正确，弃用-->
     <!--<plugins>
