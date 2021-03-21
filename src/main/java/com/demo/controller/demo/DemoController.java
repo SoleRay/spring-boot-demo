@@ -1,6 +1,5 @@
 package com.demo.controller.demo;
 
-import com.demo.anno.ResponseResult;
 import com.demo.entity.demo.Demo;
 import com.demo.service.demo.DemoService;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +14,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
 @RestController
-@ResponseResult
 @RequestMapping("/demo")
 public class DemoController {
 

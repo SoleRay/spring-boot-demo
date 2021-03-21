@@ -1,6 +1,5 @@
 package com.demo.controller.geo;
 
-import com.demo.anno.ResponseResult;
 import com.demo.dto.request.geo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.Circle;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@ResponseResult
 @RequestMapping("/geo")
 public class GeoController {
 

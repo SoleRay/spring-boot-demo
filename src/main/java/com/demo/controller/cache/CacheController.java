@@ -1,7 +1,5 @@
 package com.demo.controller.cache;
 
-import com.demo.anno.ResponseResult;
-import com.demo.bean.result.Result;
 import com.demo.entity.demo.Demo;
 import com.demo.service.cache.CacheService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@ResponseResult
 @RequestMapping("/cache")
 public class CacheController {
 

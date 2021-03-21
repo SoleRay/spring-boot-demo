@@ -1,7 +1,5 @@
 package com.demo.controller.redis;
 
-import com.demo.anno.ResponseResult;
-import com.demo.bean.result.Result;
 import com.demo.util.redis.RedisLock;
 import com.demo.util.uuid.UUIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.concurrent.CountDownLatch;
 
 @RestController
-@ResponseResult
 @RequestMapping("/redis")
 public class RedisController {
 

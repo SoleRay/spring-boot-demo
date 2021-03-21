@@ -1,7 +1,6 @@
 package com.demo.controller.mvc;
 
 
-import com.demo.anno.ResponseResult;
 import com.demo.dto.request.array.EntityArrayInEntity;
 import com.demo.dto.request.array.SimpleArrayInEntity;
 import com.demo.dto.request.collection.EntityListInEntity;
@@ -10,11 +9,7 @@ import com.demo.dto.request.demo.DemoReqDTO;
 import com.demo.dto.request.entity.*;
 import com.demo.dto.request.map.EntityMapInEntity;
 import com.demo.dto.request.map.SimpleMapInEntity;
-import com.demo.service.demo.DemoService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +21,6 @@ import java.util.Map;
 
 @Slf4j
 @RestController
-@ResponseResult
 @RequestMapping("/mvc/param")
 public class SpringMvcParamController {
 
