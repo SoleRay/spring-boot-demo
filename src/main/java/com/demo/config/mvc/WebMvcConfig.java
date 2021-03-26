@@ -1,11 +1,13 @@
 package com.demo.config.mvc;
 
 import com.demo.interceptor.DemoInterceptor;
+import org.springframework.boot.autoconfigure.web.servlet.WebMvcRegistrations;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 @Configuration
-public class WebMvcConfig implements WebMvcConfigurer {
+public class WebMvcConfig implements WebMvcConfigurer, WebMvcRegistrations {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -20,5 +22,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedOrigins("*")
                 .allowedHeaders("GET","POST","PUT","DELETE");
+    }
+
+    @Override
+    public RequestMappingHandlerMapping getRequestMappingHandlerMapping() {
+        return new APIVersionHandlerMapping();
     }
 }

@@ -1,4 +1,4 @@
-package com.demo.config.aop.handler;
+package com.demo.aop.handler;
 
 import com.demo.anno.NoAPIResponse;
 import com.demo.bean.result.ErrorResult;

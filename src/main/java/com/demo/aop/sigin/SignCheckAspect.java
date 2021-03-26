@@ -1,4 +1,4 @@
-package com.demo.config.aop.sigin;
+package com.demo.aop.sigin;
 
 import com.demo.bean.result.ResultCode;
 import com.demo.exception.BusinessException;
