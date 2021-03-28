@@ -3,9 +3,9 @@ package com.demo.listener;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-public class DemoListener implements ServletContextListener {
+public class DemoServletListener implements ServletContextListener {
 
-    public DemoListener() {
+    public DemoServletListener() {
         super();
     }
 
