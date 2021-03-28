@@ -3,6 +3,7 @@ package com.demo.controller.demo;
 import com.demo.anno.APIVersion;
 import com.demo.entity.demo.Demo;
 import com.demo.service.demo.DemoService;
+import com.demo.util.mock.MockUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,5 +59,17 @@ public class DemoController {
     @PostMapping(value="lookDemo")
     public void lookDemo(){
         System.out.println("lookDemo....");
+    }
+
+    @PostMapping(value="jvmDemo")
+    public void jvmDemo(){
+        try {
+            TimeUnit.MILLISECONDS.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        MockUtil.forEach(500, i->{
+            Object[] objects = new Object[1024 * 1024 * 100];
+        });
     }
 }
