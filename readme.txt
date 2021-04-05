@@ -5,3 +5,4 @@
 5.LocalDate，LocalDateTime的入参使用@DateTimeFormat标记，出参使用@JsonFormat标记（注意时区）
 6.自定义常量配置文件，采用注入的形式，详情参考demo.properties、PropDemo.java
 7.mybatis的逆向生成可以通过mvn命令，只要在command里输入mybatis-generator:generate即可
+8.插件名称：BetterIntelliJ
