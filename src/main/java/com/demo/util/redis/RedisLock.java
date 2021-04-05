@@ -78,8 +78,8 @@ public class RedisLock extends AbstractQueuedSynchronizer {
         @Override
         public void lock(String value) {
             while (!tryLock(value)) {
+                lock.lock();
                 try {
-                    lock.lock();
                     condition.await(expireTime,TimeUnit.MILLISECONDS);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -91,9 +91,9 @@ public class RedisLock extends AbstractQueuedSynchronizer {
 
         @Override
         public void unlock() {
+            lock.lock();
             try {
                 redisTemplate.delete(key);
-                lock.lock();
                 condition.signalAll();
                 LOG.info(Thread.currentThread().getName() + " successful release lock!");
             } finally {

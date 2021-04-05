@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 public class FilterConfig {
 
     @Bean
-    public FilterRegistrationBean configJFinalFilter() {
+    public FilterRegistrationBean demoFilter() {
         FilterRegistrationBean registration = new FilterRegistrationBean();
         registration.setFilter(new DemoFilter());
         registration.addUrlPatterns("/demo/*");
